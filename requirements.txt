@@ -1,0 +1,6 @@
+selenium
+requests
+zipfile
+threading
+pandas
+openpyxl
