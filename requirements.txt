@@ -1,6 +1,5 @@
 selenium
-requests
-zipfile
-threading
+matplotlib
+seaborn
 pandas
 openpyxl
