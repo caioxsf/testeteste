@@ -3,7 +3,7 @@ import seaborn as sns
 import os
 
 class GraphicsData:
-    def __init__(self, output_dir="visualizacoes"):
+    def __init__(self, output_dir="image-graphics"):
         self.output_dir = output_dir
         os.makedirs(self.output_dir, exist_ok=True)
         sns.set(style="whitegrid")

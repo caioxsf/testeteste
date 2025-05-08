@@ -1,12 +1,15 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 import concurrent.futures
+import os
 
-DOWNLOAD_DIR = r'C:\Users\Caio\Documents\Faculdade\github repositorios\testeteste\xlsx'
+DOWNLOAD_DIR = os.path.join(os.getcwd(), "data")
 
 def download_file(url, selector_button_download, name_thread):
 
@@ -25,12 +28,16 @@ def download_file(url, selector_button_download, name_thread):
 
     
     chrome_options.add_experimental_option("prefs", prefs)
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
     try:
         driver.get(url)
         wait = WebDriverWait(driver, 10)
-        wait.until(EC.element_to_be_clickable((By.XPATH, selector_button_download))).click()
+        # wait.until(EC.element_to_be_clickable((By.XPATH, selector_button_download))).click()
+        element = wait.until(EC.presence_of_element_located((By.XPATH, selector_button_download)))
+        driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        time.sleep(1)
+        driver.execute_script("arguments[0].click();", element)
         time.sleep(10)
         print(f"[{name_thread}] Download concluído.")
 

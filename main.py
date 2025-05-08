@@ -1,7 +1,8 @@
 from src.download import run_threads
 from src.analyze_data import AnalyzeData
+import os
 
-DOWNLOAD_DIR = r'C:\Users\Caio\Documents\Faculdade\github repositorios\testeteste\xlsx'
+DOWNLOAD_DIR = os.path.join(os.getcwd(), "data")
 
 arquivos = {
     "simples": "projecoes_2024_tab1_idade_simples.xlsx",
